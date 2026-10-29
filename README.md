@@ -48,7 +48,7 @@ composer require fastd/integrations
 
 ### 1. 配置文件
 
-新增 `config/integrations.php`：
+新增 `config/integrations.php`（完整示例见 `examples/config/integrations.php`）：
 
 ```php
 <?php
@@ -106,7 +106,7 @@ Provider 的配置来源：
 1. 容器中的 `integrations.config` 数组；
 2. 应用根目录的 `config/integrations.php`。
 
-如果没有配置 `etcd.base_uri`，Provider 直接跳过，不影响应用启动。
+如果没有配置 `etcd.base_uri`，etcd 相关服务会跳过；tracing 和 rate limit 仍可独立启用。
 
 ### 2. 注册 ServiceProvider
 

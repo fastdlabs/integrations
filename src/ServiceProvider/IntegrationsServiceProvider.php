@@ -42,6 +42,10 @@ final class IntegrationsServiceProvider implements ServiceProviderInterface
     public function register(Container $container): void
     {
         $config = $this->config($container);
+
+        $this->registerTracing($container, $config);
+        $this->registerRateLimit($container, $config);
+
         $etcdConfig = (array) ($config['etcd'] ?? []);
 
         if ($etcdConfig === [] || empty($etcdConfig['base_uri'])) {
@@ -87,9 +91,6 @@ final class IntegrationsServiceProvider implements ServiceProviderInterface
                 (string) ($etcdConfig['config_prefix'] ?? '/fastd/config'),
             ),
         );
-
-        $this->registerTracing($container, $config);
-        $this->registerRateLimit($container, $config);
 
         if (isset($config['service']) && is_array($config['service']) && $config['service'] !== []) {
             $service = $config['service'];

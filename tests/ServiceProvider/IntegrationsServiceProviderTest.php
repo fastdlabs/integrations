@@ -75,6 +75,35 @@ final class IntegrationsServiceProviderTest extends TestCase
         self::assertCount(2, $matcher->middleware);
     }
 
+    public function testTracingAndRateLimitDoNotRequireEtcd(): void
+    {
+        $matcher = new class {
+            /** @var object[] */
+            public array $middleware = [];
+
+            public function push(object $middleware): void
+            {
+                $this->middleware[] = $middleware;
+            }
+        };
+
+        $container = new Container();
+        $container->add('integrations.config', [
+            'tracing' => ['enabled' => true],
+            'governance' => [
+                'rate_limit' => ['enabled' => true],
+            ],
+        ]);
+        $container->add('matcher', $matcher);
+
+        (new IntegrationsServiceProvider())->register($container);
+
+        self::assertFalse($container->has('integrations.etcd'));
+        self::assertTrue($container->has('integrations.tracing.middleware'));
+        self::assertTrue($container->has('integrations.governance.rate_limit_middleware'));
+        self::assertCount(2, $matcher->middleware);
+    }
+
     public function testSkipsWhenEtcdIsNotConfigured(): void
     {
         $container = new Container();
