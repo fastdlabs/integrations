@@ -20,6 +20,8 @@
         }
     ],
     "require": {
+        "fastd/container": "^8.1",
+        "fastd/http": "^8.2",
         "php": ">=8.4.1",
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.0",
@@ -28,7 +30,6 @@
         "psr/http-server-middleware": "^1.0"
     },
     "require-dev": {
-        "fastd/http": "^8.2",
         "phpunit/phpunit": "^13.4"
     },
     "autoload": {
