@@ -1,0 +1,51 @@
+{
+    "name": "fastd/integrations",
+    "type": "library",
+    "license": "MIT",
+    "description": "Optional microservice integrations for FastD: etcd discovery/config, service clients, W3C tracing and client-side governance.",
+    "keywords": [
+        "fastd",
+        "microservice",
+        "etcd",
+        "service-discovery",
+        "tracing",
+        "circuit-breaker",
+        "rate-limit"
+    ],
+    "homepage": "https://github.com/fastdlabs/integrations",
+    "authors": [
+        {
+            "name": "janhuang",
+            "email": "bboyjanhuang@gmail.com"
+        }
+    ],
+    "require": {
+        "fastd/container": "^8.1",
+        "fastd/http": "^8.2",
+        "php": ">=8.4.1",
+        "psr/http-client": "^1.0",
+        "psr/http-factory": "^1.0",
+        "psr/http-message": "^2.0",
+        "psr/http-server-handler": "^1.0",
+        "psr/http-server-middleware": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^13.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "FastD\\Integrations\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FastD\\Integrations\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
